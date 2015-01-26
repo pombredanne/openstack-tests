@@ -21,10 +21,10 @@ from openstackci.tester import TestUnit
 class TestAgentsStarted(TestUnit):
     name = "Agents Started"
     description = "Verifies an installation has all required agents started"
-    identifier = 'agents_started'
+    identifier = '00_agents_started'
 
     def run(self):
-        self.report.success("Yes!")
+        self.report.success("Agents are started.")
         return 0
 
 __test_class__ = TestAgentsStarted
