@@ -30,7 +30,7 @@ class TestAutopilotDeployed(TestUnit):
         out = utils.get_command_output(
             'JUJU_HOME={} juju ssh 0/lxc/2 -- test -f '
             '/var/log/landscape/job-handler-1.log'.format(
-                path.join(utils.install_home(), '.cloud-install/juju'))
+                path.join(utils.install_home(), '.cloud-install/juju')))
         if out['status'] == 0:
             self.report.success("Found Landscape job handler.")
             return out['status']
