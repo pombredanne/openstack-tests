@@ -26,7 +26,6 @@ class TestAutopilotDeployed(TestUnit):
     identifier = '00_autopilot_deployed'
 
     def run(self):
-        cfg = utils.populate_config()
         out = utils.get_command_output(
             'JUJU_HOME={} juju ssh 0/lxc/2 -- test -f '
             '/var/log/landscape/job-handler-1.log'.format(
