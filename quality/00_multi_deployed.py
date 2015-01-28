@@ -19,11 +19,11 @@ from openstackci.tester import TestUnit
 from openstackci.validator import Validator
 
 
-class TestAutopilotServicesRunning(TestUnit):
-    name = "Autopilot - all services running"
-    description = "Verifies all services are started in deployment."
-    identifier = '01_autopilot_all_services_running'
-    install_type = 'Landscape OpenStack Autopilot'
+class TestMultiDeployed(TestUnit):
+    name = "Multi install deploy"
+    description = "Verifies the multi install deployed."
+    identifier = '00_multi_deployed'
+    install_type = 'Multi'
 
     def run(self):
         validate = Validator(self.config, self.juju_state)
@@ -33,4 +33,4 @@ class TestAutopilotServicesRunning(TestUnit):
         else:
             self.report.fail('Test services failed {}'.format(services))
 
-__test_class__ = TestAutopilotServicesRunning
+__test_class__ = TestMultiDeployed
