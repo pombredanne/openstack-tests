@@ -16,25 +16,22 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from openstackci.tester import TestUnit
-import cloudinstall.utils as utils
 
 
-class TestAutopilotDeployed(TestUnit):
-    name = "Landscape OpenStack Autopilot"
-    description = "Verifies the autopilot deployed."
-    identifier = '00_autopilot_deployed'
+class TestAutopilotServicesRunning(TestUnit):
+    name = "Autopilot - all services running"
+    description = "Verifies all services are started in deployment."
+    identifier = '01_autopilot_all_services_running'
     install_type = 'Landscape OpenStack Autopilot'
 
     def run(self):
-        service = self.juju_state.service('apache2')
-        unit = service.units[0]
-        cmd = ('curl -Ls --insecure '
-               'http://{}/account/standalone/openstack|grep title'.format(
-                   unit.public_address))
-        out = utils.get_command_output(cmd)
-        if 'Welcome! - Landscape' in out['output']:
-            self.report.success("Found Landscape welcome page.")
-        else:
-            self.report.fail('Could not determine Landscape welcome page.')
+        services = self.juju_state.services
+        for svc in services:
+            unit = svc.units[0]
+            if 'started' not in unit.agent_state:
+                self.report.fail(
+                    '{} service not started'.format(unit.unit_name))
+        if len(self.report.failed_tests) == 0:
+            self.report.success('All services started')
 
-__test_class__ = TestAutopilotDeployed
+__test_class__ = TestAutopilotServicesRunning

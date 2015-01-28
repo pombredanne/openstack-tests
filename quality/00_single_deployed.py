@@ -23,6 +23,7 @@ class TestSingleDeployed(TestUnit):
     name = "Single Deploy"
     description = "Verifies the single install path deployed."
     identifier = '00_single_deployed'
+    install_type = 'Single'
 
     def run(self):
         cmd = ("JUJU_HOME=~/.cloud-install/juju juju status")
