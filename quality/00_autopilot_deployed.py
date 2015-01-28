@@ -16,7 +16,6 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from openstackci.tester import TestUnit
-import os.path as path
 import cloudinstall.utils as utils
 
 
@@ -26,15 +25,15 @@ class TestAutopilotDeployed(TestUnit):
     identifier = '00_autopilot_deployed'
 
     def run(self):
-        out = utils.get_command_output(
-            'JUJU_HOME={} juju ssh 0/lxc/2 -- test -f '
-            '/var/log/landscape/job-handler-1.log'.format(
-                path.join(utils.install_home(), '.cloud-install/juju')))
-        if out['status'] == 0:
-            self.report.success("Found Landscape job handler.")
-            return out['status']
+        service = self.juju_state.service('apache2')
+        unit = service.units[0]
+        cmd = ('curl -Ls --insecure '
+               'http://{}/account/standalone/openstack|grep title'.format(
+                   unit.public_address))
+        out = utils.get_command_output(cmd)
+        if 'Welcome! - Landscape' in out['output']:
+            self.report.success("Found Landscape welcome page.")
         else:
-            self.report.fail("Couldn't find a deployed Landscape")
-            return out['status']
+            self.report.fail('Could not determine Landscape welcome page.')
 
 __test_class__ = TestAutopilotDeployed

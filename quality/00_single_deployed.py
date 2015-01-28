@@ -29,9 +29,7 @@ class TestSingleDeployed(TestUnit):
         out = utils.container_run('uoi-bootstrap', cmd)
         if 'environments: local' in out:
             self.report.success("Single install deployed.")
-            return 0
         else:
             self.report.fail("Failed to query juju environment")
-            return 1
 
 __test_class__ = TestSingleDeployed
