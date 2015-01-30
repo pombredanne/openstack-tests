@@ -24,6 +24,7 @@ class TestSingleCorrectNetworkBridge(TestUnit):
                    "network bridge")
     identifier = '00_single_network_bridge'
     install_type = 'Single'
+    bug = 1416134
 
     def run(self):
         if self.juju_env['network-bridge'] == 'lxcbr0':
