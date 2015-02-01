@@ -31,11 +31,11 @@ class TestSingleCloudController(TestUnit):
         for u in ['admin', 'ubuntu']:
             cmd = ("JUJU_HOME=~/.cloud-install/juju juju ssh "
                    "nova-cloud-controller/0 -- "
-                   "test -f /tmp/openstack-{}-rc".format(u))
+                   "test -f /tmp/openstack-{}-rc && echo PASS".format(u))
             out = utils.container_run('uoi-bootstrap', cmd)
-            if out['status'] != 0:
-                self.report.fail("Failed to query juju environment")
-            else:
+            if 'PASS' in out:
                 self.report.success("Found openstack-{}-rc".format(u))
+            else:
+                self.report.fail("Did find openstack-{}-rc".format(u))
 
 __test_class__ = TestSingleCloudController
