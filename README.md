@@ -6,18 +6,18 @@
 On the system where the installer is run do the following:
 
 ```
-pip install pytest
+$ sudo apt-get install python3-pytest
 ```
 
 ## Single Installer
 
 ```
-py.test tests/test_single.py
+py.test-3 tests/test_single.py
 ```
 
 ## Autopilot Installer
 
 ```
-py.test tests/test_autopilot.py
+py.test-3 tests/test_autopilot.py
 ```
 
