@@ -12,5 +12,12 @@ pip install pytest
 ## Single Installer
 
 ```
-py.test -q tests/test_single.py
+py.test tests/test_single.py
 ```
+
+## Autopilot Installer
+
+```
+py.test tests/test_autopilot.py
+```
+
