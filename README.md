@@ -21,3 +21,8 @@ py.test-3 tests/test_single.py
 py.test-3 tests/test_autopilot.py
 ```
 
+## Multi Installer
+
+```
+py.test-3 tests/test_multi.py
+```
