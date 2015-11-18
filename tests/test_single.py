@@ -37,7 +37,7 @@ class TestSingle:
     def test_bootstrap_succeeded(self):
         """ Verifies a local bootstrap happened
         """
-        cmd = ("JUJU_HOME=~/.cloud-install/juju juju status")
+        cmd = ("JUJU_HOME=~/.cloud-install/juju juju stat --format yaml")
         out = Container.run(self.CONFIG['container_name'], cmd, use_ssh=True)
         out = out.split("\n")[0].strip()
         assert('environment: local' in out)
