@@ -48,8 +48,8 @@ class TestSingle:
         """ Verifies Autopilot's login page is accessible
         """
         _state = juju_state()
-        apache = _state.service("apache2")
-        unit = apache.unit('apache')
+        haproxy = _state.service("haproxy")
+        unit = haproxy.unit('haproxy')
         res = requests.get("http://{}/account/standalone/openstack".format(
             unit.public_address), verify=False)
         assert(b"Welcome! - Landscape" in res.content)
